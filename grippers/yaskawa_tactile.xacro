@@ -45,7 +45,7 @@
         </collision>
     </link>
       
-    <link name="ext_finger_3">
+    <link name="ext_finger_2">
         <inertial>
           <origin xyz="-0.005550196974422999 -0.015531770123516614 -0.010351884823019339" rpy="0 0 0"/>
           <mass value="0.17786635698192355"/>
@@ -66,16 +66,16 @@
         </collision>
     </link>
     
-    <joint name="Rigido5" type="fixed">
+    <joint name="jaw_ext_1" type="fixed">
         <origin xyz="-0.040873 -0.039895 0.057583" rpy="0 0 0"/>
-        <parent link="Base_Jaw_3"/>
+        <parent link="Base_Jaw_1"/>
         <child link="ext_finger_1"/>
       </joint>
       
-      <joint name="Rigido4" type="fixed">
+      <joint name="jaw_ext_2" type="fixed">
         <origin xyz="-0.138753 -0.040549 0.03692" rpy="0 0 ${-0*deg}"/>
-        <parent link="Base_Jaw_4"/>
-        <child link="ext_finger_3"/>
+        <parent link="Base_Jaw_2"/>
+        <child link="ext_finger_2"/>
       </joint>
 
     <xacro:include filename="$(find wsg32_description)/grippers/wsg32.urdf"/>
