@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wgs32_camera">
+
+  <xacro:property name="deg" value="0.017453293" />
+  <!--degrees to radians-->
+
+  <link name="base_link_gripper">
+    <inertial>
+      <origin xyz="0.03129440494284765 -0.0236275456406487 0.0633242924961397" rpy="0 0 0"/>
+      <mass value="0.49962194311335323"/>
+      <inertia ixx="0.001045" iyy="0.001292" izz="0.000438" ixy="6.1e-05" iyz="-0.000254" ixz="0.000195"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find gripper_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="white1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find gripper_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="camera_ext">
+    <inertial>
+      <origin xyz="-0.03 0.032 0.11" rpy="0 0 0"/>
+      <mass value="0.49962194311335323"/>
+      <inertia ixx="0.001045" iyy="0.001292" izz="0.000438" ixy="6.1e-05" iyz="-0.000254" ixz="0.000195"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find gripper_description)/meshes/extension_camera_support.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="white1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find gripper_description)/meshes/extension_camera_support.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="ext_finger_1">
+    <inertial>
+      <origin xyz="0.005297128503583257 -0.015412565841978962 -0.010725009096658585" rpy="0 0 0"/>
+      <mass value="0.17786635698192355"/>
+      <inertia ixx="4.9e-05" iyy="3.1e-05" izz="3.9e-05" ixy="8e-06" iyz="-0.0" ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find gripper_description)/meshes/finger_ext.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="white1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find gripper_description)/meshes/finger_ext.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="ext_finger_2">
+    <inertial>
+      <origin xyz="-0.005550196974422999 -0.015531770123516614 -0.010351884823019339" rpy="0 0 0"/>
+      <mass value="0.17786635698192355"/>
+      <inertia ixx="4.9e-05" iyy="3.1e-05" izz="3.9e-05" ixy="-8e-06" iyz="0.0" ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find gripper_description)/meshes/finger_ext.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="white1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find gripper_description)/meshes/finger_ext.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="camera_ext_joint" type="fixed">
+    <origin xyz="-0.0295 0.0327 0.1132" rpy="0 0 0"/>
+    <parent link="base_link_gripper"/>
+    <child link="camera_ext"/>
+  </joint>
+
+  <joint name="jaw_ext_1" type="fixed">
+    <origin xyz="0 0.005 0" rpy="0 0 -0.01"/>
+    <parent link="Base_Jaw_1"/>
+    <child link="ext_finger_1"/>
+  </joint>
+
+  <joint name="jaw_ext_2" type="fixed">
+    <origin xyz="0 0.005 0" rpy="0 0 -0.01"/>
+    <parent link="Base_Jaw_2"/>
+    <child link="ext_finger_2"/>
+  </joint>
+
+  <xacro:include filename="$(find wsg32_description)/grippers/wsg32.urdf"/>
+  <xacro:wsg32_link base_link='base_link_gripper' materials_="0"/>
+
+  <xacro:include filename="$(find fingers_description)/fingers/sun_tactile.urdf"/>
+  <xacro:tactile_link base_link_1='ext_finger_1' xyz_1="-0.0379 0.02 -0.0987" rpy_1="-1.5902 0.01 -1.5511" base_link_2='ext_finger_2' xyz_2="-0.0369 0.02 -0.099" rpy_2="-1.5805 0.01 -1.55"/>
+
+
+<xacro:include filename="$(find realsense2_description)/urdf/_d435i.urdf.xacro"/>
+<!-- CAMERA REALSENSE D435i upper-->
+<xacro:sensor_d435i parent="camera_ext" name="camera_upper" use_nominal_extrinsics="true">
+  <origin xyz="-0.0034 -0.0223 0.03" rpy="3.14 0.12 -1.57"/>
+</xacro:sensor_d435i>
+
+<!-- CAMERA REALSENSE D435i bottom-->
+<xacro:sensor_d435i parent="base_link_gripper" name="camera_bottom" use_nominal_extrinsics="true">
+  <origin xyz="-0.033 0.023 0.094" rpy="0 0.378 -1.57"/>
+</xacro:sensor_d435i>
+
+
+</robot>
