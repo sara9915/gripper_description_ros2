@@ -13,14 +13,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find gripper_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find gripper_description_ros2)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="white1"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find gripper_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find gripper_description_ros2)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -34,14 +34,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find gripper_description)/meshes/extension_camera_support.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find gripper_description_ros2)/meshes/extension_camera_support.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="white1"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find gripper_description)/meshes/extension_camera_support.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find gripper_description_ros2)/meshes/extension_camera_support.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -55,14 +55,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find gripper_description)/meshes/finger_ext.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find gripper_description_ros2)/meshes/finger_ext.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="white1"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find gripper_description)/meshes/finger_ext.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find gripper_description_ros2)/meshes/finger_ext.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -76,14 +76,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find gripper_description)/meshes/finger_ext.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find gripper_description_ros2)/meshes/finger_ext.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="white1"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find gripper_description)/meshes/finger_ext.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find gripper_description_ros2)/meshes/finger_ext.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -106,10 +106,10 @@
     <child link="ext_finger_2"/>
   </joint>
 
-  <xacro:include filename="$(find wsg32_description)/grippers/wsg32.urdf"/>
+  <xacro:include filename="$(find wsg32_description_ros2)/grippers/wsg32.urdf"/>
   <xacro:wsg32_link base_link='base_link_gripper' materials_="0"/>
 
-  <xacro:include filename="$(find fingers_description)/fingers/sun_tactile.urdf"/>
+  <xacro:include filename="$(find sun_fingers_description_ros2)/fingers/sun_tactile.urdf"/>
   <xacro:tactile_link base_link_1='ext_finger_1' xyz_1="-0.0379 0.02 -0.0987" rpy_1="-1.5902 0.01 -1.5511" base_link_2='ext_finger_2' xyz_2="-0.0369 0.02 -0.099" rpy_2="-1.5805 0.01 -1.55"/>
 
 

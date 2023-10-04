@@ -10,7 +10,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    xacro_file_default = os.path.join(get_package_share_directory('gripper_description'), 'grippers',
+    xacro_file_default = os.path.join(get_package_share_directory('gripper_description_ros2'), 'grippers',
                                      'gripper_pushing.xacro')
 
     model_launch_arg = DeclareLaunchArgument(
@@ -23,7 +23,7 @@ def generate_launch_description():
     robot_description = Command(
         [FindExecutable(name='xacro'), ' ', LaunchConfiguration('model')])
 
-    rviz_file = os.path.join(get_package_share_directory('gripper_description'), 'rviz',
+    rviz_file = os.path.join(get_package_share_directory('gripper_description_ros2'), 'rviz',
                              'visualize.rviz')
 
     return LaunchDescription([   
