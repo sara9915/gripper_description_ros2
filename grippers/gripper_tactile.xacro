@@ -125,4 +125,14 @@
 </xacro:sensor_d435i>
 
 
+<!-- END EFFECTOR FINGERS -->
+<link name="ee_fingers"> </link>
+
+<joint name="tool0_ee" type="fixed">
+  <origin xyz="0 0 0.21" rpy="0 0 0"/>
+  <parent link="tool0"/>
+  <child link="ee_fingers"/>
+</joint>
+
+
 </robot>
