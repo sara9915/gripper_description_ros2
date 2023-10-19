@@ -109,7 +109,7 @@
   <xacro:include filename="$(find wsg32_description_ros2)/grippers/wsg32.urdf"/>
   <xacro:wsg32_link base_link='base_link_gripper' materials_="0"/>
 
-  <xacro:include filename="$(find sun_fingers_description_ros2)/fingers/sun_tactile.urdf"/>
+  <xacro:include filename="$(find uclv_fingers_description_ros2)/fingers/sun_tactile.urdf"/>
   <xacro:tactile_link base_link_1='ext_finger_1' xyz_1="-0.0379 0.02 -0.0987" rpy_1="-1.5902 0.01 -1.5511" base_link_2='ext_finger_2' xyz_2="-0.0369 0.02 -0.099" rpy_2="-1.5805 0.01 -1.55"/>
 
 
