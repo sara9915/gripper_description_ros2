@@ -1,35 +1,75 @@
 <?xml version='1.0' encoding='utf-8'?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wgs32_camera">
 
-    <xacro:property name="deg" value="0.017453293" /> <!--degrees to radians-->
+  <xacro:property name="deg" value="0.017453293" />
+  <!--degrees to radians-->
 
-    <xacro:include filename="$(find gripper_description_ros2)/grippers/gripper_tactile.xacro"/>
+  <xacro:include filename="$(find gripper_description_ros2)/grippers/gripper_tactile.xacro"/>
 
-    <link name="push_extension">
-        <inertial>
-          <origin xyz="-0.002113007458297622 -0.026370216471355318 -0.000277269428080415" rpy="0 0 0"/>
-          <mass value="0.06014924243379804"/>
-          <inertia ixx="4.3e-05" iyy="1.7e-05" izz="2.7e-05" ixy="0.0" iyz="1.6e-05" ixz="-0.0"/>
-        </inertial>
-        <visual>
-          <origin xyz="0 0 0" rpy="0 0 0"/>
-          <geometry>
-            <mesh filename="file://$(find gripper_description_ros2)/meshes/pusher_ext.stl" scale="0.001 0.001 0.001"/>
-          </geometry>
-          <material name="white1"/>
-        </visual>
-        <collision>
-          <origin xyz="0 0 0" rpy="0 0 0"/>
-          <geometry>
-            <mesh filename="file://$(find gripper_description_ros2)/meshes/pusher_ext.stl" scale="0.001 0.001 0.001"/>
-          </geometry>
-        </collision>
-      </link>
+  <link name="adapter_fingerside">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.06014924243379804"/>
+      <inertia ixx="4.3e-05" iyy="1.7e-05" izz="2.7e-05" ixy="0.0" iyz="1.6e-05" ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find gripper_description_ros2)/meshes/adapter_fingerside.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="white1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find gripper_description_ros2)/meshes/adapter_fingerside.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
-      <joint name="tactile_joint_pusher" type="fixed">
-        <origin xyz="0.00012757793764987647 -0.2859275779376499 0.07637889688249402" rpy="-1.5606521280013759 0.00020384840978560081 0.020189250214579735"/>
-        <parent link="tactile_2"/>
-        <child link="push_extension"/>
-      </joint>
-      
+  <link name="pusher_tactile">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.06014924243379804"/>
+      <inertia ixx="4.3e-05" iyy="1.7e-05" izz="2.7e-05" ixy="0.0" iyz="1.6e-05" ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0174 0.015 0.0819" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find gripper_description_ros2)/meshes/pusher_unified_v2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="white1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find gripper_description_ros2)/meshes/pusher_unified_v2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- <link name="revolute_pusher"></link> -->
+
+  <joint name="tactile_2_adapter" type="fixed">
+    <origin xyz="-0.0021 -0.24539999999999998 0.0358" rpy="2.034443935795705 -1.5487669913464823 -0.46364760900080837"/>
+    <parent link="tactile_2"/>
+    <child link="adapter_fingerside"/>
+  </joint>
+
+  <joint name="rotation_pusher" type="revolute">
+    <origin xyz="0 0 0" rpy="0.0 0.0 0.0" /> 
+    <parent link="adapter_fingerside" />
+    <child link="pusher_tactile" />
+    <axis xyz="0 -1 0" />
+    <limit lower="${-180.0*deg}" upper="${0*deg}" effort="0" velocity="${200.0*deg}" />
+  </joint>
+
+  <link name="push_extension"></link>
+  <joint name="push_fixed" type="fixed">
+    <origin xyz="0.0174 0.015 0.0819" rpy="0 0 0"/>
+    <parent link="pusher_tactile"/>
+    <child link="push_extension"/>
+  </joint> 
+
+
 </robot>

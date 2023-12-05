@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wgs32_camera">
+
+    <xacro:property name="deg" value="0.017453293" /> <!--degrees to radians-->
+
+    <xacro:include filename="$(find gripper_description_ros2)/grippers/gripper_tactile.xacro"/>
+
+    <link name="push_extension">
+        <inertial>
+          <origin xyz="-0.002113007458297622 -0.026370216471355318 -0.000277269428080415" rpy="0 0 0"/>
+          <mass value="0.06014924243379804"/>
+          <inertia ixx="4.3e-05" iyy="1.7e-05" izz="2.7e-05" ixy="0.0" iyz="1.6e-05" ixz="-0.0"/>
+        </inertial>
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <geometry>
+            <mesh filename="file://$(find gripper_description_ros2)/meshes/pusher_ext.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <material name="white1"/>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <geometry>
+            <mesh filename="file://$(find gripper_description_ros2)/meshes/pusher_ext.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+        </collision>
+      </link>
+
+      <joint name="tactile_joint_pusher" type="fixed">
+        <origin xyz="0.00012757793764987647 -0.2859275779376499 0.07637889688249402" rpy="-1.5606521280013759 0.00020384840978560081 0.020189250214579735"/>
+        <parent link="tactile_2"/>
+        <child link="push_extension"/>
+      </joint>
+      
+</robot>
