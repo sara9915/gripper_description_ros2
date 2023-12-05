@@ -56,7 +56,7 @@
     <child link="adapter_fingerside"/>
   </joint>
 
-  <joint name="rotation_pusher" type="revolute">
+  <joint name="rotation_pusher" type="fixed">
     <origin xyz="0 0 0" rpy="0.0 0.0 0.0" /> 
     <parent link="adapter_fingerside" />
     <child link="pusher_tactile" />
