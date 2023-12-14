@@ -11,7 +11,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
 
     xacro_file_default = os.path.join(get_package_share_directory('gripper_description_ros2'), 'grippers',
-                                     'gripper_iiwa_pushing.xacro')
+                                     'iiwa_pushing.xacro')
 
     model_launch_arg = DeclareLaunchArgument(
         name='model',

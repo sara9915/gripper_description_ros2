@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wgs50_tactile_camera">
+
+  <xacro:property name="deg" value="0.017453293" />
+  <xacro:property name="base_link" value="base_link_gripper" />
+  <xacro:property name="prefix_finger_left" value="left/" />
+  <xacro:property name="prefix_finger_right" value="right/" />
+  <xacro:property name="finger_flange_link" value="finger_flange_link" />
+
+
+  <!-- <joint name="camera_ext_joint" type="fixed">
+    <origin xyz="-0.0295 0.0327 0.1132" rpy="0 0 0"/>
+    <parent link="base_link_gripper"/>
+    <child link="camera_ext"/>
+  </joint> -->
+
+
+  <xacro:include filename="$(find uclv_wsg50_simulation)/urdf/wsg50.xacro" />
+  <xacro:wsg50 base_link="${base_link}" prefix_finger_left="${prefix_finger_left}"
+    prefix_finger_right="${prefix_finger_right}"
+    finger_flange_left_link="${finger_flange_link}" finger_flange_right_link="${finger_flange_link}" />
+
+  <xacro:include filename="$(find uclv_fingers_description_ros2)/fingers/uclv_tactile.urdf" />
+  <xacro:tactile_link base_link_1="${prefix_finger_right}${finger_flange_link}"
+    xyz_1="-0.0127 -0.0361 -0.0535"
+    rpy_1="-1.57 0.0 0.02" base_link_2='${prefix_finger_left}${finger_flange_link}'
+    xyz_2="-0.0127 -0.0361 -0.0535"
+    rpy_2="-1.57 0 0.02" />
+
+
+  <!-- CAMERA REALSENSE D435i -->
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435i.urdf.xacro" />
+
+  <xacro:sensor_d435i parent="${base_link}" name="camera" use_nominal_extrinsics="true">
+    <!-- <origin xyz="-0.0322 0.0895 -0.0325" rpy="0 -1.30899694 -1.57" /> -->
+    <origin xyz="0.0322 -0.0895 -0.0525" rpy="0   -1.3090   1.5700" />
+  </xacro:sensor_d435i>
+
+  <!-- -0.0322 0.0895 -0.0325 0 -1.30899694 -1.57 -->
+  <!-- camera transform pos={0 -0.099 -0.0390} q={x=0 y= 0.1301 z=-0.9915 w=0.0001} -->
+
+
+
+  <!-- END EFFECTOR FINGERS -->
+  <link name="ee_fingers"> </link>
+
+  <joint name="tool0_ee" type="fixed">
+    <origin xyz="0 0 0.185" rpy="0 0 0" />
+    <parent link="${base_link}" />
+    <child link="ee_fingers" />
+  </joint>
+
+
+</robot>
