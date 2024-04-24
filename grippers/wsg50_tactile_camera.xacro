@@ -23,7 +23,7 @@
   <xacro:include filename="$(find uclv_fingers_description_ros2)/fingers/uclv_tactile.urdf" />
   <xacro:tactile_link base_link_1="${prefix_finger_right}${finger_flange_link}"
     xyz_1="-0.0127 -0.0361 -0.0535"
-    rpy_1="-1.57 0.0 0.02" base_link_2='${prefix_finger_left}${finger_flange_link}'
+    rpy_1="-1.57 0.0 0.10" base_link_2='${prefix_finger_left}${finger_flange_link}'
     xyz_2="-0.0127 -0.0361 -0.0535"
     rpy_2="-1.57 0 0.02" />
 
