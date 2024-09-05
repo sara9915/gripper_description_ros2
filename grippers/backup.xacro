@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wgs50_push_config">
 
-  <xacro:include filename="$(find gripper_description_ros2)/grippers/wsg50_tactile_camera_ext.xacro" />
+  <xacro:include filename="$(find gripper_description_ros2)/grippers/wsg50_tactile_camera.xacro" />
   <xacro:include filename="$(find gripper_description_ros2)/grippers/materials_.xacro" />
 
   <link name="adapter_fingerside">
@@ -34,7 +34,7 @@
       <inertia ixx="4.3e-05" iyy="1.7e-05" izz="2.7e-05" ixy="0.0" iyz="1.6e-05" ixz="-0.0" />
     </inertial>
     <visual>
-      <origin xyz="0.0174 0.015 0.0819" rpy="0 0 -0.2" />
+      <origin xyz="0.0174 0.018 0.0819" rpy="0 0.0 -0.1" />
       <geometry>
         <mesh filename="file://$(find gripper_description_ros2)/meshes/pusher_unified_v2.stl"
           scale="0.001 0.001 0.001" />
@@ -62,7 +62,7 @@
   </joint>
 
   <joint name="rotation_pusher" type="fixed">
-    <origin xyz="0 0 0" rpy="0.0 0.0 0.0" />
+    <origin xyz="0 0 0" rpy="0.0 0.05 0.0" />
     <parent link="adapter_fingerside" />
     <child link="pusher_tactile" />
     <axis xyz="0 -1 0" />
@@ -70,7 +70,7 @@
   </joint>
 
   <joint name="push_fixed" type="fixed">
-    <origin xyz="0.0174 0.015 0.0819" rpy="1.57 0 1.40" />
+    <origin xyz="0.018 0.018 0.0819" rpy="1.52 0 1.42" />
     <parent link="pusher_tactile" />
     <child link="push_extension" />
   </joint>
