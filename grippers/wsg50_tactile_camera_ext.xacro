@@ -52,7 +52,7 @@
   </link>
 
   <joint name="camera_ext_joint" type="fixed">
-    <origin xyz="0 -0.04 0.0006" rpy="-1.57 0 -3.140" />
+    <origin xyz="0 -0.004 0.0006" rpy="-1.65 0 -3.140" />
     <parent link="${base_link}" />
     <child link="camera_ext" />
   </joint>
@@ -61,8 +61,10 @@
   <xacro:include filename="$(find realsense2_description)/urdf/_d435i.urdf.xacro" />
 
   <xacro:sensor_d435i parent="camera_ext" name="camera" use_nominal_extrinsics="true">
+    <!-- without extension -->
     <!-- <origin xyz="-0.0322 0.0895 -0.0325" rpy="0 -1.30899694 -1.57" /> -->
-    <origin xyz="-0.033 0.0795 0.1498" rpy="0   0.14   -1.5700" />
+    <!-- with extension -->
+    <origin xyz="-0.033 0.0795 0.1498" rpy="0   0.1   -1.55" /> 
   </xacro:sensor_d435i>
 
   <!-- -0.0322 0.0895 -0.0325 0 -1.30899694 -1.57 -->
